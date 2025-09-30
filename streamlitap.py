@@ -14,7 +14,7 @@ def load_data():
     df_raw = pd.read_csv(
         "https://raw.githubusercontent.com/Excitedicecream/CSV-Files/refs/heads/main/Groceries_dataset.csv"
     )
-    grouped_df = df_raw.groupby(["Member_number","Date"])["itemDescription"].apply(list).reset_index()
+    grouped_df = df_raw.groupby("Member_number")["itemDescription"].apply(list).reset_index()
     mlb = MultiLabelBinarizer()
     df = pd.DataFrame(
         mlb.fit_transform(grouped_df["itemDescription"]),
