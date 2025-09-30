@@ -74,8 +74,8 @@ if page == "Apriori":
     st.dataframe(frequent_itemsets[["support", "itemsets_str", "length"]].head(20))
 
     st.subheader("🥇 Top Single Items")
-    top_items = frequent_itemsets[frequent_itemsets["length"] == 1]
-    st.bar_chart(top_items.set_index("itemsets_str")["support"].head(10))
+    top_items = frequent_itemsets[frequent_itemsets["support"] > 0.05]
+    st.bar_chart(top_items.set_index("itemsets_str")["support"])
 
 # =====================
 # Page 2: Association Rules
