@@ -83,15 +83,14 @@ if page == "Apriori":
 elif page == "Association Rules":
     st.subheader("Association Rules using FP-Growth")
     @st.cache_data
-    def run_fpgrowth_rules(data, min_support, min_conf, min_lift):
-        freq_items = fpgrowth(data, min_support=min_support, use_colnames=True)
-        rules = association_rules(freq_items, metric="lift", min_threshold=min_lift)
+    def run_fpgrowth_rules(data):
+        freq_items = fpgrowth(data, min_support=0.01, use_colnames=True)  
+        rules = association_rules(freq_items, metric="lift", min_threshold=0.5)  
         rules["antecedents"] = rules["antecedents"].apply(lambda x: ", ".join(list(x)))
         rules["consequents"] = rules["consequents"].apply(lambda x: ", ".join(list(x)))
-        rules = rules[(rules["confidence"] >= min_conf) & (rules["lift"] >= min_lift)]
         return rules.sort_values("lift", ascending=False)
 
-    rules = run_fpgrowth_rules(df, FP_MIN_SUPPORT, FP_MIN_CONF, FP_MIN_LIFT)
+    rules = run_fpgrowth_rules(df)
 
     st.subheader("Rules")
     st.dataframe(rules[["antecedents", "consequents", "support", "confidence", "lift"]].head(20))
