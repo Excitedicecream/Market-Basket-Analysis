@@ -44,12 +44,12 @@ FP_MIN_LIFT = 1.2
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["Apriori", "Association Rules"])
 
-
+st.title("Market Basket Analysis with Apriori Algorithm")
 # =====================
 # Page 1: Apriori
 # =====================
 if page == "Apriori":
-    
+    st.subheader("📋 Dataset Overview")
 
     with st.expander("📂 Raw Data", expanded=False):
         st.dataframe(df_raw.head(20))
@@ -60,6 +60,7 @@ if page == "Apriori":
     with st.expander("🔠 One-Hot Encoded Data", expanded=False):
         st.dataframe(df.head(20))
 
+    st.subheader("🔍 Frequent Itemsets using Apriori")
     @st.cache_data
     def run_apriori(data, min_support):
         freq_items = apriori(data, min_support=min_support, use_colnames=True)
@@ -80,6 +81,7 @@ if page == "Apriori":
 # Page 2: Association Rules
 # =====================
 elif page == "Association Rules":
+    st.subheader("Association Rules using FP-Growth")
     @st.cache_data
     def run_fpgrowth_rules(data, min_support, min_conf, min_lift):
         freq_items = fpgrowth(data, min_support=min_support, use_colnames=True)
