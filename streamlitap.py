@@ -39,11 +39,30 @@ page = st.sidebar.radio("Go to", ["Apriori", "Association Rules"])
 st.sidebar.markdown("---")
 st.sidebar.header("📈 Algorithm Parameters")
 
-# Dynamic sliders
-min_support_apriori = st.sidebar.slider("Apriori Min Support", 0.001, 0.1, 0.01, 0.001)
-min_support_fp = st.sidebar.slider("FP-Growth Min Support", 0.001, 0.1, 0.02, 0.001)
-min_confidence = st.sidebar.slider("Min Confidence", 0.1, 1.0, 0.7, 0.05)
-min_lift = st.sidebar.slider("Min Lift", 1.0, 3.0, 1.2, 0.1)
+# Show sliders conditionally
+if page == "Apriori":
+    min_support_apriori = st.sidebar.slider(
+        "Apriori Min Support",
+        0.001, 0.1, 0.01, 0.001,
+        help="Minimum frequency of item combinations to be considered frequent. Lower values = more itemsets, but possibly less meaningful."
+    )
+
+elif page == "Association Rules":
+    min_support_fp = st.sidebar.slider(
+        "FP-Growth Min Support",
+        0.001, 0.1, 0.02, 0.001,
+        help="Minimum frequency threshold for FP-Growth algorithm."
+    )
+    min_confidence = st.sidebar.slider(
+        "Min Confidence",
+        0.1, 1.0, 0.7, 0.05,
+        help="How often the consequent appears when the antecedent appears. Higher confidence = stronger rule reliability."
+    )
+    min_lift = st.sidebar.slider(
+        "Min Lift",
+        1.0, 3.0, 1.2, 0.1,
+        help="Indicates how much more likely items are to occur together than by random chance. Lift > 1 means a positive association."
+    )
 
 # Recommended settings note
 with st.sidebar.expander("💡 Recommended Settings", expanded=False):
@@ -59,12 +78,13 @@ with st.sidebar.expander("💡 Recommended Settings", expanded=False):
         """
     )
 
+
 st.sidebar.markdown("---")
 st.sidebar.header("👤 About the Creator")
 st.sidebar.markdown(
     """
 **Jonathan Wong Tze Syuen**  
-📚 Data Science Enthusiast & Educator  
+📚 Data Science  
 
 🔗 [Connect on LinkedIn](https://www.linkedin.com/in/jonathan-wong-2b9b39233/)
 
