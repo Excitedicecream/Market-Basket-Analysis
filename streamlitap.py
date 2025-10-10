@@ -79,16 +79,16 @@ with st.sidebar.expander("💡 Recommended Settings", expanded=False):
     )
 
 
+# Sidebar Author Info
 st.sidebar.markdown("---")
 st.sidebar.header("👤 About the Creator")
 st.sidebar.markdown(
     """
-**Jonathan Wong Tze Syuen**  
+**Jonathan Wong**  
 📚 Data Science  
 
-🔗 [Connect on LinkedIn](https://www.linkedin.com/in/jonathan-wong-2b9b39233/)
-
-🔗 [Connect on Github](https://github.com/Excitedicecream)
+🔗 [LinkedIn](https://www.linkedin.com/in/jonathan-wong-2b9b39233/)  
+🔗 [GitHub](https://github.com/Excitedicecream)
 """
 )
 
